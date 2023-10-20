@@ -21,17 +21,17 @@ public class TypingManager : MonoBehaviour
     public TMP_Text successCountText; // 表示するためのTextMeshProテキストオブジェクト
     public TMP_Text failureCountText;
 
-    private readonly List<char> _roman = new List<char>();
+    private readonly List<char> roman = new List<char>();
 
-    private int _romanIndex;
-    private int _successCount = 0; // 成功文字数のカウント
-    private int _failureCount = 0;
+    private int romanIndex;
+    private int successCount = 0; // 成功文字数のカウント
+    private int failureCount = 0;
 
-    private bool _isWindows;
-    private bool _isMac;
+    private bool isWindows;
+    private bool isMac;
 
-    private bool _acceptingInput = true; // 入力を受け付けるかどうかを制御するフラグ
-    private float _inputDelayTime = 0.1f; // ミスタイプ後の一時停止時間（秒）
+    private bool acceptingInput = true; // 入力を受け付けるかどうかを制御するフラグ
+    private float inputDelayTime = 0.1f; // ミスタイプ後の一時停止時間（秒）
 
     private CountDownTimer timer;
 
@@ -39,12 +39,12 @@ public class TypingManager : MonoBehaviour
     {
         if (SystemInfo.operatingSystem.Contains("Windows"))
         {
-            _isWindows = true;
+            isWindows = true;
         }
 
         if (SystemInfo.operatingSystem.Contains("Mac"))
         {
-            _isMac = true;
+            isMac = true;
         }
 
         timer = GameObject.FindObjectOfType<CountDownTimer>();
@@ -65,7 +65,7 @@ public class TypingManager : MonoBehaviour
 
     private void OnGUI()
     {
-        if (!_acceptingInput)
+        if (!acceptingInput)
         {
             return; // 入力を受け付けない場合は処理せずに戻る
         }
@@ -75,8 +75,8 @@ public class TypingManager : MonoBehaviour
             switch (InputKey(GetCharFromKeyCode(Event.current.keyCode)))
             {
                 case 1: // 正解タイプ時
-                    _romanIndex++;
-                    if (_roman[_romanIndex] == '@') // 「@」がタイピングの終わりの判定となる。
+                    romanIndex++;
+                    if (roman[romanIndex] == '@') // 「@」がタイピングの終わりの判定となる。
                     {
                         InitializeQuestion();
                     }
@@ -98,18 +98,18 @@ public class TypingManager : MonoBehaviour
     {
         Question question = questions[UnityEngine.Random.Range(0, questions.Length)];
 
-        _roman.Clear();
+        roman.Clear();
 
-        _romanIndex = 0;
+        romanIndex = 0;
 
         char[] characters = question.roman.ToCharArray();
 
         foreach (char character in characters)
         {
-            _roman.Add(character);
+            roman.Add(character);
         }
 
-        _roman.Add('@');
+        roman.Add('@');
 
         textJapanese.text = question.japanese;
         textRoman.text = GenerateTextRoman();
@@ -117,55 +117,55 @@ public class TypingManager : MonoBehaviour
 
     private void OnSuccessTyping()
     {
-        _successCount++; // 成功文字数を増やす
+        successCount++; // 成功文字数を増やす
         UpdateSuccessCountText(); // 成功文字数の表示を更新する
     }
 
     private void OnFailureTyping()
     {
-        _failureCount++;
+        failureCount++;
         UpdateFailureCountText();
-        _acceptingInput = false; // 一時停止を開始
-        StartCoroutine(ResumeInputAfterDelay(_inputDelayTime)); // 一定時間後に入力を再開する
+        acceptingInput = false; // 一時停止を開始
+        StartCoroutine(ResumeInputAfterDelay(inputDelayTime)); // 一定時間後に入力を再開する
     }
 
     private IEnumerator ResumeInputAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        _acceptingInput = true; // 入力を再開
+        acceptingInput = true; // 入力を再開
     }
 
     private void UpdateSuccessCountText()
     {
-        successCountText.text = "Success: " + _successCount.ToString(); // テキストを更新する
+        successCountText.text = "Success: " + successCount.ToString(); // テキストを更新する
     }
 
     private void UpdateFailureCountText()
     {
-        failureCountText.text = "Failure: " + _failureCount.ToString(); // テキストを更新する
+        failureCountText.text = "Failure: " + failureCount.ToString(); // テキストを更新する
     }
 
     public void StopAcceptingInput()
     {
-        _acceptingInput = false;
+        acceptingInput = false;
     }
 
     string GenerateTextRoman()
     {
         string text = "<style=typed>";
-        for (int i = 0; i < _roman.Count; i++)
+        for (int i = 0; i < roman.Count; i++)
         {
-            if (_roman[i] == '@')
+            if (roman[i] == '@')
             {
                 break;
             }
 
-            if (i == _romanIndex)
+            if (i == romanIndex)
             {
                 text += "</style><style=untyped>";
             }
 
-            text += _roman[i];
+            text += roman[i];
         }
 
         text += "</style>";
@@ -175,12 +175,12 @@ public class TypingManager : MonoBehaviour
 
     int InputKey(char inputChar)
     {
-        char prevChar3 = _romanIndex >= 3 ? _roman[_romanIndex - 3] : '\0';
-        char prevChar2 = _romanIndex >= 2 ? _roman[_romanIndex - 2] : '\0';
-        char prevChar = _romanIndex >= 1 ? _roman[_romanIndex - 1] : '\0';
-        char currentChar = _roman[_romanIndex];
-        char nextChar = _roman[_romanIndex + 1];
-        char nextChar2 = nextChar == '@' ? '@' : _roman[_romanIndex + 2];
+        char prevChar3 = romanIndex >= 3 ? roman[romanIndex - 3] : '\0';
+        char prevChar2 = romanIndex >= 2 ? roman[romanIndex - 2] : '\0';
+        char prevChar = romanIndex >= 1 ? roman[romanIndex - 1] : '\0';
+        char currentChar = roman[romanIndex];
+        char nextChar = roman[romanIndex + 1];
+        char nextChar2 = nextChar == '@' ? '@' : roman[romanIndex + 2];
 
         if (inputChar == '\0')
         {
@@ -193,24 +193,24 @@ public class TypingManager : MonoBehaviour
         }
 
         //「い」の柔軟な入力（Windowsのみ）
-        if (_isWindows && inputChar == 'y' && currentChar == 'i' &&
+        if (isWindows && inputChar == 'y' && currentChar == 'i' &&
             (prevChar == '\0' || prevChar == 'a' || prevChar == 'i' || prevChar == 'u' || prevChar == 'e' ||
              prevChar == 'o'))
         {
-            _roman.Insert(_romanIndex, 'y');
+            roman.Insert(romanIndex, 'y');
             return 1;
         }
 
-        if (_isWindows && inputChar == 'y' && currentChar == 'i' && prevChar == 'n' && prevChar2 == 'n' &&
+        if (isWindows && inputChar == 'y' && currentChar == 'i' && prevChar == 'n' && prevChar2 == 'n' &&
             prevChar3 != 'n')
         {
-            _roman.Insert(_romanIndex, 'y');
+            roman.Insert(romanIndex, 'y');
             return 1;
         }
 
-        if (_isWindows && inputChar == 'y' && currentChar == 'i' && prevChar == 'n' && prevChar2 == 'x')
+        if (isWindows && inputChar == 'y' && currentChar == 'i' && prevChar == 'n' && prevChar2 == 'x')
         {
-            _roman.Insert(_romanIndex, 'y');
+            roman.Insert(romanIndex, 'y');
             return 1;
         }
 
@@ -218,62 +218,62 @@ public class TypingManager : MonoBehaviour
         if (inputChar == 'w' && currentChar == 'u' && (prevChar == '\0' || prevChar == 'a' || prevChar == 'i' ||
                                                        prevChar == 'u' || prevChar == 'e' || prevChar == 'o'))
         {
-            _roman.Insert(_romanIndex, 'w');
+            roman.Insert(romanIndex, 'w');
             return 1;
         }
 
         if (inputChar == 'w' && currentChar == 'u' && prevChar == 'n' && prevChar2 == 'n' && prevChar3 != 'n')
         {
-            _roman.Insert(_romanIndex, 'w');
+            roman.Insert(romanIndex, 'w');
             return 1;
         }
 
         if (inputChar == 'w' && currentChar == 'u' && prevChar == 'n' && prevChar2 == 'x')
         {
-            _roman.Insert(_romanIndex, 'w');
+            roman.Insert(romanIndex, 'w');
             return 1;
         }
 
-        if (_isWindows && inputChar == 'h' && prevChar2 != 't' && prevChar2 != 'd' && prevChar == 'w' &&
+        if (isWindows && inputChar == 'h' && prevChar2 != 't' && prevChar2 != 'd' && prevChar == 'w' &&
             currentChar == 'u')
         {
-            _roman.Insert(_romanIndex, 'h');
+            roman.Insert(romanIndex, 'h');
             return 1;
         }
 
         //「か」「く」「こ」の柔軟な入力（Windowsのみ）
-        if (_isWindows && inputChar == 'c' && prevChar != 'k' &&
+        if (isWindows && inputChar == 'c' && prevChar != 'k' &&
             currentChar == 'k' && (nextChar == 'a' || nextChar == 'u' || nextChar == 'o'))
         {
-            _roman[_romanIndex] = 'c';
+            roman[romanIndex] = 'c';
             return 1;
         }
 
         //「く」の柔軟な入力（Windowsのみ）
-        if (_isWindows && inputChar == 'q' && prevChar != 'k' && currentChar == 'k' && nextChar == 'u')
+        if (isWindows && inputChar == 'q' && prevChar != 'k' && currentChar == 'k' && nextChar == 'u')
         {
-            _roman[_romanIndex] = 'q';
+            roman[romanIndex] = 'q';
             return 1;
         }
 
         //「し」の柔軟な入力
         if (inputChar == 'h' && prevChar == 's' && currentChar == 'i')
         {
-            _roman.Insert(_romanIndex, 'h');
+            roman.Insert(romanIndex, 'h');
             return 1;
         }
 
         //「じ」の柔軟な入力
         if (inputChar == 'j' && currentChar == 'z' && nextChar == 'i')
         {
-            _roman[_romanIndex] = 'j';
+            roman[romanIndex] = 'j';
             return 1;
         }
 
         //「しゃ」「しゅ」「しぇ」「しょ」の柔軟な入力
         if (inputChar == 'h' && prevChar == 's' && currentChar == 'y')
         {
-            _roman[_romanIndex] = 'h';
+            roman[romanIndex] = 'h';
             return 1;
         }
 
@@ -281,52 +281,52 @@ public class TypingManager : MonoBehaviour
         if (inputChar == 'z' && prevChar != 'j' && currentChar == 'j' &&
             (nextChar == 'a' || nextChar == 'u' || nextChar == 'e' || nextChar == 'o'))
         {
-            _roman[_romanIndex] = 'z';
-            _roman.Insert(_romanIndex + 1, 'y');
+            roman[romanIndex] = 'z';
+            roman.Insert(romanIndex + 1, 'y');
             return 1;
         }
 
         if (inputChar == 'y' && prevChar == 'j' &&
             (currentChar == 'a' || currentChar == 'u' || currentChar == 'e' || currentChar == 'o'))
         {
-            _roman.Insert(_romanIndex, 'y');
+            roman.Insert(romanIndex, 'y');
             return 1;
         }
 
         //「し」「せ」の柔軟な入力（Windowsのみ）
-        if (_isWindows && inputChar == 'c' && prevChar != 's' && currentChar == 's' &&
+        if (isWindows && inputChar == 'c' && prevChar != 's' && currentChar == 's' &&
             (nextChar == 'i' || nextChar == 'e'))
         {
-            _roman[_romanIndex] = 'c';
+            roman[romanIndex] = 'c';
             return 1;
         }
 
         //「ち」の柔軟な入力
         if (inputChar == 'c' && prevChar != 't' && currentChar == 't' && nextChar == 'i')
         {
-            _roman[_romanIndex] = 'c';
-            _roman.Insert(_romanIndex + 1, 'h');
+            roman[romanIndex] = 'c';
+            roman.Insert(romanIndex + 1, 'h');
             return 1;
         }
 
         //「ちゃ」「ちゅ」「ちぇ」「ちょ」の柔軟な入力
         if (inputChar == 'c' && prevChar != 't' && currentChar == 't' && nextChar == 'y')
         {
-            _roman[_romanIndex] = 'c';
+            roman[romanIndex] = 'c';
             return 1;
         }
 
         //「cya」=>「cha」
         if (inputChar == 'h' && prevChar == 'c' && currentChar == 'y')
         {
-            _roman[_romanIndex] = 'h';
+            roman[romanIndex] = 'h';
             return 1;
         }
 
         //「つ」の柔軟な入力
         if (inputChar == 's' && prevChar == 't' && currentChar == 'u')
         {
-            _roman.Insert(_romanIndex, 's');
+            roman.Insert(romanIndex, 's');
             return 1;
         }
 
@@ -334,63 +334,63 @@ public class TypingManager : MonoBehaviour
         if (inputChar == 'u' && prevChar == 't' && currentChar == 's' &&
             (nextChar == 'a' || nextChar == 'i' || nextChar == 'e' || nextChar == 'o'))
         {
-            _roman[_romanIndex] = 'u';
-            _roman.Insert(_romanIndex + 1, 'x');
+            roman[romanIndex] = 'u';
+            roman.Insert(romanIndex + 1, 'x');
             return 1;
         }
 
         if (inputChar == 'u' && prevChar2 == 't' && prevChar == 's' &&
             (currentChar == 'a' || currentChar == 'i' || currentChar == 'e' || currentChar == 'o'))
         {
-            _roman.Insert(_romanIndex, 'u');
-            _roman.Insert(_romanIndex + 1, 'x');
+            roman.Insert(romanIndex, 'u');
+            roman.Insert(romanIndex + 1, 'x');
             return 1;
         }
 
         //「てぃ」の柔軟な入力
         if (inputChar == 'e' && prevChar == 't' && currentChar == 'h' && nextChar == 'i')
         {
-            _roman[_romanIndex] = 'e';
-            _roman.Insert(_romanIndex + 1, 'x');
+            roman[romanIndex] = 'e';
+            roman.Insert(romanIndex + 1, 'x');
             return 1;
         }
 
         //「でぃ」の柔軟な入力
         if (inputChar == 'e' && prevChar == 'd' && currentChar == 'h' && nextChar == 'i')
         {
-            _roman[_romanIndex] = 'e';
-            _roman.Insert(_romanIndex + 1, 'x');
+            roman[romanIndex] = 'e';
+            roman.Insert(romanIndex + 1, 'x');
             return 1;
         }
 
         //「でゅ」の柔軟な入力
         if (inputChar == 'e' && prevChar == 'd' && currentChar == 'h' && nextChar == 'u')
         {
-            _roman[_romanIndex] = 'e';
-            _roman.Insert(_romanIndex + 1, 'x');
-            _roman.Insert(_romanIndex + 2, 'y');
+            roman[romanIndex] = 'e';
+            roman.Insert(romanIndex + 1, 'x');
+            roman.Insert(romanIndex + 2, 'y');
             return 1;
         }
 
         //「とぅ」の柔軟な入力
         if (inputChar == 'o' && prevChar == 't' && currentChar == 'w' && nextChar == 'u')
         {
-            _roman[_romanIndex] = 'o';
-            _roman.Insert(_romanIndex + 1, 'x');
+            roman[romanIndex] = 'o';
+            roman.Insert(romanIndex + 1, 'x');
             return 1;
         }
         //「どぅ」の柔軟な入力
         if (inputChar == 'o' && prevChar == 'd' && currentChar == 'w' && nextChar == 'u')
         {
-            _roman[_romanIndex] = 'o';
-            _roman.Insert(_romanIndex + 1, 'x');
+            roman[romanIndex] = 'o';
+            roman.Insert(romanIndex + 1, 'x');
             return 1;
         }
 
         //「ふ」の柔軟な入力
         if (inputChar == 'f' && currentChar == 'h' && nextChar == 'u')
         {
-            _roman[_romanIndex] = 'f';
+            roman[romanIndex] = 'f';
             return 1;
         }
 
@@ -398,29 +398,29 @@ public class TypingManager : MonoBehaviour
         if (inputChar == 'w' && prevChar == 'f' &&
             (currentChar == 'a' || currentChar == 'i' || currentChar == 'e' || currentChar == 'o'))
         {
-            _roman.Insert(_romanIndex, 'w');
+            roman.Insert(romanIndex, 'w');
             return 1;
         }
 
         if (inputChar == 'y' && prevChar == 'f' && (currentChar == 'i' || currentChar == 'e'))
         {
-            _roman.Insert(_romanIndex, 'y');
+            roman.Insert(romanIndex, 'y');
             return 1;
         }
 
         if (inputChar == 'h' && prevChar != 'f' && currentChar == 'f' &&
             (nextChar == 'a' || nextChar == 'i' || nextChar == 'e' || nextChar == 'o'))
         {
-            if (_isMac)
+            if (isMac)
             {
-                _roman[_romanIndex] = 'h';
-                _roman.Insert(_romanIndex + 1, 'w');
+                roman[romanIndex] = 'h';
+                roman.Insert(romanIndex + 1, 'w');
             }
             else
             {
-                _roman[_romanIndex] = 'h';
-                _roman.Insert(_romanIndex + 1, 'u');
-                _roman.Insert(_romanIndex + 2, 'x');
+                roman[romanIndex] = 'h';
+                roman.Insert(romanIndex + 1, 'u');
+                roman.Insert(romanIndex + 2, 'x');
             }
             return 1;
         }
@@ -428,16 +428,16 @@ public class TypingManager : MonoBehaviour
         if (inputChar == 'u' && prevChar == 'f' &&
             (currentChar == 'a' || currentChar == 'i' || currentChar == 'e' || currentChar == 'o'))
         {
-            _roman.Insert(_romanIndex, 'u');
-            _roman.Insert(_romanIndex + 1, 'x');
+            roman.Insert(romanIndex, 'u');
+            roman.Insert(romanIndex + 1, 'x');
             return 1;
         }
 
-        if (_isMac && inputChar == 'u' && prevChar == 'h' && currentChar == 'w' &&
+        if (isMac && inputChar == 'u' && prevChar == 'h' && currentChar == 'w' &&
             (nextChar == 'a' || nextChar == 'i' || nextChar == 'e' || nextChar == 'o'))
         {
-            _roman[_romanIndex] = 'u';
-            _roman.Insert(_romanIndex + 1, 'x');
+            roman[romanIndex] = 'u';
+            roman.Insert(romanIndex + 1, 'x');
             return 1;
         }
 
@@ -445,7 +445,7 @@ public class TypingManager : MonoBehaviour
         if (inputChar == 'n' && prevChar2 != 'n' && prevChar == 'n' && currentChar != 'a' && currentChar != 'i' &&
             currentChar != 'u' && currentChar != 'e' && currentChar != 'o' && currentChar != 'y')
         {
-            _roman.Insert(_romanIndex, 'n');
+            roman.Insert(romanIndex, 'n');
             return 1;
         }
 
@@ -454,11 +454,11 @@ public class TypingManager : MonoBehaviour
         {
             if (nextChar == 'n')
             {
-                _roman[_romanIndex] = 'x';
+                roman[romanIndex] = 'x';
             }
             else
             {
-                _roman.Insert(_romanIndex, 'x');
+                roman.Insert(romanIndex, 'x');
             }
             return 1;
         }
@@ -466,8 +466,8 @@ public class TypingManager : MonoBehaviour
         //「うぃ」「うぇ」「うぉ」を分解する
         if (inputChar == 'u' && currentChar == 'w' && nextChar == 'h' && (nextChar2 == 'a' || nextChar2 == 'i' || nextChar2 == 'e' || nextChar2 == 'o'))
         {
-            _roman[_romanIndex] = 'u';
-            _roman[_romanIndex] = 'x';
+            roman[romanIndex] = 'u';
+            roman[romanIndex] = 'x';
         }
 
         //「きゃ」「にゃ」などを分解する
@@ -479,13 +479,13 @@ public class TypingManager : MonoBehaviour
         {
             if (nextChar == 'e')
             {
-                _roman[_romanIndex] = 'i';
-                _roman.Insert(_romanIndex + 1, 'x');
+                roman[romanIndex] = 'i';
+                roman.Insert(romanIndex + 1, 'x');
             }
             else
             {
-                _roman.Insert(_romanIndex, 'i');
-                _roman.Insert(_romanIndex + 1, 'x');
+                roman.Insert(romanIndex, 'i');
+                roman.Insert(romanIndex + 1, 'x');
             }
             return 1;
         }
@@ -497,33 +497,33 @@ public class TypingManager : MonoBehaviour
         {
             if (nextChar == 'e')
             {
-                _roman.Insert(_romanIndex, 'i');
-                _roman.Insert(_romanIndex + 1, 'x');
+                roman.Insert(romanIndex, 'i');
+                roman.Insert(romanIndex + 1, 'x');
             }
             else
             {
-                _roman.Insert(_romanIndex, 'i');
-                _roman.Insert(_romanIndex + 1, 'x');
-                _roman.Insert(_romanIndex + 2, 'y');
+                roman.Insert(romanIndex, 'i');
+                roman.Insert(romanIndex + 1, 'x');
+                roman.Insert(romanIndex + 2, 'y');
             }
             return 1;
         }
 
         //「しゃ」を「c」で分解する（Windows限定）
-        if (_isWindows && inputChar == 'c' && currentChar == 's' && prevChar != 's' && nextChar == 'y' &&
+        if (isWindows && inputChar == 'c' && currentChar == 's' && prevChar != 's' && nextChar == 'y' &&
             (nextChar2 == 'a' || nextChar2 == 'u' || nextChar2 == 'e' || nextChar2 == 'o'))
         {
             if (nextChar2 == 'e')
             {
-                _roman[_romanIndex] = 'c';
-                _roman[_romanIndex + 1] = 'i';
-                _roman.Insert(_romanIndex + 1, 'x');
+                roman[romanIndex] = 'c';
+                roman[romanIndex + 1] = 'i';
+                roman.Insert(romanIndex + 1, 'x');
             }
             else
             {
-                _roman[_romanIndex] = 'c';
-                _roman.Insert(_romanIndex + 1, 'i');
-                _roman.Insert(_romanIndex + 2, 'x');
+                roman[romanIndex] = 'c';
+                roman.Insert(romanIndex + 1, 'i');
+                roman.Insert(romanIndex + 2, 'x');
             }
             return 1;
         }
@@ -536,65 +536,65 @@ public class TypingManager : MonoBehaviour
              currentChar == 'd' && nextChar == 'd' || currentChar == 'b' && nextChar == 'b' ||
              currentChar == 'p' && nextChar == 'p'))
         {
-            _roman[_romanIndex] = inputChar;
-            _roman.Insert(_romanIndex + 1, 't');
-            _roman.Insert(_romanIndex + 2, 'u');
+            roman[romanIndex] = inputChar;
+            roman.Insert(romanIndex + 1, 't');
+            roman.Insert(romanIndex + 2, 'u');
             return 1;
         }
 
         //「っか」「っく」「っこ」の柔軟な入力（Windows限定）
-        if (_isWindows && inputChar == 'c' && currentChar == 'k' && nextChar == 'k' &&
+        if (isWindows && inputChar == 'c' && currentChar == 'k' && nextChar == 'k' &&
             (nextChar2 == 'a' || nextChar2 == 'u' || nextChar2 == 'o'))
         {
-            _roman[_romanIndex] = 'c';
-            _roman[_romanIndex + 1] = 'c';
+            roman[romanIndex] = 'c';
+            roman[romanIndex + 1] = 'c';
             return 1;
         }
 
         //「っく」の柔軟な入力（Windows限定）
-        if (_isWindows && inputChar == 'q' && currentChar == 'k' && nextChar == 'k' && nextChar2 == 'u')
+        if (isWindows && inputChar == 'q' && currentChar == 'k' && nextChar == 'k' && nextChar2 == 'u')
         {
-            _roman[_romanIndex] = 'q';
-            _roman[_romanIndex + 1] = 'q';
+            roman[romanIndex] = 'q';
+            roman[romanIndex + 1] = 'q';
             return 1;
         }
 
         //「っし」「っせ」の柔軟な入力（Windows限定）
-        if (_isWindows && inputChar == 'c' && currentChar == 's' && nextChar == 's' &&
+        if (isWindows && inputChar == 'c' && currentChar == 's' && nextChar == 's' &&
             (nextChar2 == 'i' || nextChar2 == 'e'))
         {
-            _roman[_romanIndex] = 'c';
-            _roman[_romanIndex + 1] = 'c';
+            roman[romanIndex] = 'c';
+            roman[romanIndex + 1] = 'c';
             return 1;
         }
 
         //「っちゃ」「っちゅ」「っちぇ」「っちょ」の柔軟な入力
         if (inputChar == 'c' && currentChar == 't' && nextChar == 't' && nextChar2 == 'y')
         {
-            _roman[_romanIndex] = 'c';
-            _roman[_romanIndex + 1] = 'c';
+            roman[romanIndex] = 'c';
+            roman[romanIndex + 1] = 'c';
             return 1;
         }
 
         //「っち」の柔軟な入力
         if (inputChar == 'c' && currentChar == 't' && nextChar == 't' && nextChar2 == 'i')
         {
-            _roman[_romanIndex] = 'c';
-            _roman[_romanIndex + 1] = 'c';
-            _roman.Insert(_romanIndex + 2, 'h');
+            roman[romanIndex] = 'c';
+            roman[romanIndex + 1] = 'c';
+            roman.Insert(romanIndex + 2, 'h');
             return 1;
         }
 
         //「l」と「x」の完全互換性
         if (inputChar == 'x' && currentChar == 'l')
         {
-            _roman[_romanIndex] = 'x';
+            roman[romanIndex] = 'x';
             return 1;
         }
 
         if (inputChar == 'l' && currentChar == 'x')
         {
-            _roman[_romanIndex] = 'l';
+            roman[romanIndex] = 'l';
             return 1;
         }
 
