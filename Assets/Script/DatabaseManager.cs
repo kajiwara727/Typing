@@ -1,13 +1,25 @@
 using UnityEngine;
 using SQLite4Unity3d;
+using System;
 
 public class DatabaseManager : MonoBehaviour
 {
-    private SQLiteConnection dbConnection;
+    public static DatabaseManager Instance { get; private set; }
+    public SQLiteConnection dbConnection;
 
     void Awake()
     {
-        InitializeDatabase();
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // このオブジェクトが破棄されないようにする
+            InitializeDatabase();
+        }
+        else
+        {
+            Destroy(gameObject); // 既にインスタンスが存在する場合、新しいものを破棄する
+        }
+
         Debug.Log("Database connection status: " + (dbConnection != null ? "Connected" : "Not connected"));
     }
 
@@ -19,7 +31,7 @@ public class DatabaseManager : MonoBehaviour
 
         // データベース接続の確立
         dbConnection = new SQLiteConnection(dbPath);
-        dbConnection.CreateTable<Person>(); // Personテーブルの作成
+        dbConnection.CreateTable<TypingResult>(); // Personテーブルの作成
         Debug.Log("Database path: " + dbPath);
 
         // 他にも初期化処理があればここで実行
@@ -40,21 +52,42 @@ public class DatabaseManager : MonoBehaviour
     }
 
     // データの追加
-    public void AddPerson(string name, string surname, int age)
+    public void AddResult(int point, int typingCount,float accuracy, int speed)
     {
-        var person = new Person
+        var typingResult = new TypingResult
         {
-            Name = name,
-            Surname = surname,
-            Age = age
+            Point = point,
+            TypingCount = typingCount,
+            Accuracy = accuracy,
+            Speed = speed
+            
         };
 
-        dbConnection.Insert(person);
+        try
+        {
+            int result = dbConnection.Insert(typingResult);
+
+            if (result > 0)
+            {
+                Debug.Log("TypingResult added successfully.");
+            }
+            else
+            {
+                Debug.LogError("Failed to add TypingResult.");
+            }
+
+            
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error adding TypingResult: " + e.Message);
+        }
     }
 
+
     // データの取得
-    public Person GetPersonById(int id)
+    public TypingResult GetTypingResultById(int id)
     {
-        return dbConnection.Table<Person>().Where(p => p.Id == id).FirstOrDefault();
+        return dbConnection.Table<TypingResult>().Where(p => p.Id == id).FirstOrDefault();
     }
 }
