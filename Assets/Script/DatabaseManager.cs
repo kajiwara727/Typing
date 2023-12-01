@@ -1,6 +1,8 @@
 using UnityEngine;
 using SQLite4Unity3d;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -31,7 +33,7 @@ public class DatabaseManager : MonoBehaviour
 
         // データベース接続の確立
         dbConnection = new SQLiteConnection(dbPath);
-        dbConnection.CreateTable<TypingResult>(); // Personテーブルの作成
+        dbConnection.CreateTable<TypingResult>();
         Debug.Log("Database path: " + dbPath);
 
         // 他にも初期化処理があればここで実行
@@ -86,8 +88,9 @@ public class DatabaseManager : MonoBehaviour
 
 
     // データの取得
-    public TypingResult GetTypingResultById(int id)
+    public List<TypingResult> GetTypingResultsOrderedByPoint()
     {
-        return dbConnection.Table<TypingResult>().Where(p => p.Id == id).FirstOrDefault();
+        // OrderByDescendingメソッドを使用してPointの降順でソート
+        return dbConnection.Table<TypingResult>().OrderByDescending(p => p.Point).ToList();
     }
 }
