@@ -7,22 +7,17 @@ public class ShowTypingSpeed : MonoBehaviour
 {
     public TextMeshProUGUI typingSpeedText;
 
-    private int typingCount = 110;
+    private int typingCount;
 
     private const float TIME = 60;
 
     // Start is called before the first frame update
     void Start()
     {
+        typingCount = TypingManager.Instance.successCount + TypingManager.Instance.failureCount;
         typingSpeedText = GetComponent<TextMeshProUGUI>();
 
         ShowResults(typingCount);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     float CalculateSpeed(int typingCount)

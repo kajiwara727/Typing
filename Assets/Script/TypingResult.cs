@@ -11,7 +11,7 @@ public class TypingResult
 
     public float Accuracy {  get; set; }
 
-    public int Speed { get; set; }
+    public float Speed { get; set; }
 
 
     public override string ToString()

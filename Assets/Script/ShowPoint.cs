@@ -1,32 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine;
 
+
 public class ShowPoint : MonoBehaviour
 {
+    private TypingManager typingManager;
+
     public TextMeshProUGUI pointText;
 
-    private int successCount = 100;
-    private int failureCount = 10;
+    private int successCount;
+    private int failureCount;
+    private int point;
 
     // Start is called before the first frame update
     void Start()
     {
+        successCount = TypingManager.Instance.successCount;
+        failureCount = TypingManager.Instance.failureCount;
+        point = CalculatePoint(successCount, failureCount);
+
         pointText = GetComponent<TextMeshProUGUI>();
 
-        ShowResults();
+        GameObject typingManagerObject = GameObject.Find("Typing");
+
+        ShowResults(point);
     }
 
-    private void Update()
+    void ShowResults(int point)
     {
-        
-    }
-
-    void ShowResults()
-    {
-        int point = CalculatePoint(successCount, failureCount);
-
         pointText.text = "ì_êî:" + point.ToString();
     }
 

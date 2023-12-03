@@ -7,26 +7,24 @@ public class ShowResult : MonoBehaviour
 {
     public TextMeshProUGUI accuracyText;
 
-    private int successCount = 100;
-    private int failureCount = 10;
+    private int successCount;
+    private int failureCount;
+    private float accuracy;
 
     // Start is called before the first frame update
     void Start()
     {
+        successCount = TypingManager.Instance.successCount;
+        failureCount = TypingManager.Instance.failureCount;
+        accuracy = CalculateAccuracy(successCount, failureCount);
+
         accuracyText = GetComponent<TextMeshProUGUI>();
 
-        ShowResults();
+        ShowResults(accuracy);
     }
 
-    // Update is called once per frame
-    void Update()
+    void ShowResults(float accuracy)
     {
-
-    }
-
-    void ShowResults()
-    {
-        float accuracy = CalculateAccuracy(successCount, failureCount);
         accuracyText.text = "ê≥ämÇ≥: " + accuracy.ToString("F2") + "%";
     }
 

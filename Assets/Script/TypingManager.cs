@@ -15,6 +15,8 @@ public class Question
 
 public class TypingManager : MonoBehaviour
 {
+    public static TypingManager Instance;
+
     [SerializeField] private Question[] questions;
     [SerializeField] private TextMeshProUGUI textJapanese; // ここに日本語表示のTextMeshProをアタッチする。
     [SerializeField] private TextMeshProUGUI textRoman; // ここにローマ字表示のTextMeshProをアタッチする。
@@ -24,8 +26,8 @@ public class TypingManager : MonoBehaviour
     private readonly List<char> roman = new List<char>();
 
     private int romanIndex;
-    private int successCount = 0; // 成功文字数のカウント
-    private int failureCount = 0;
+    public int successCount = 0; // 成功文字数のカウント
+    public int failureCount = 0;
 
     private bool isWindows;
     private bool isMac;
@@ -37,6 +39,8 @@ public class TypingManager : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
+
         if (SystemInfo.operatingSystem.Contains("Windows"))
         {
             isWindows = true;
@@ -46,6 +50,7 @@ public class TypingManager : MonoBehaviour
         {
             isMac = true;
         }
+
 
         timer = GameObject.FindObjectOfType<CountDownTimer>();
 

@@ -54,7 +54,7 @@ public class DatabaseManager : MonoBehaviour
     }
 
     // ÉfÅ[É^ÇÃí«â¡
-    public void AddResult(int point, int typingCount,float accuracy, int speed)
+    public void AddResult(int point, int typingCount,float accuracy, float speed)
     {
         var typingResult = new TypingResult
         {
