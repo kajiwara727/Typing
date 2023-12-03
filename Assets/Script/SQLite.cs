@@ -1569,7 +1569,12 @@ namespace SQLite4Unity3d
 				}
 			}
 		}
-	}
+
+        internal bool TableExists<T>()
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 	/// <summary>
 	/// Represents a parsed connection string.

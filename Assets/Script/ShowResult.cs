@@ -25,7 +25,7 @@ public class ShowResult : MonoBehaviour
 
     void ShowResults(float accuracy)
     {
-        accuracyText.text = "ê≥ämÇ≥: " + accuracy.ToString("F2") + "%";
+        accuracyText.text = "ê≥ë≈ó¶: " + accuracy.ToString("F2") + "%";
     }
 
     float CalculateAccuracy(int successCount, int failureCount)

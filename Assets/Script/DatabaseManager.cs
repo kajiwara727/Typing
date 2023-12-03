@@ -33,10 +33,15 @@ public class DatabaseManager : MonoBehaviour
 
         // データベース接続の確立
         dbConnection = new SQLiteConnection(dbPath);
+
         dbConnection.CreateTable<TypingResult>();
         Debug.Log("Database path: " + dbPath);
 
         // 他にも初期化処理があればここで実行
+        if (GetRecordCount() < 5)
+        {
+            InsertInitialData();
+        }
     }
 
     void OnDestroy()
@@ -51,6 +56,32 @@ public class DatabaseManager : MonoBehaviour
     public void ConnectToDatabase()
     {
         InitializeDatabase();
+    }
+
+    int GetRecordCount()
+    {
+        try
+        {
+            // TypingResultテーブルのレコード数を取得
+            int count = dbConnection.Table<TypingResult>().Count();
+
+            return count;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error getting record count: " + e.Message);
+            return -1; // エラーが発生した場合は適切に処理するか、エラーコードを返すなど
+        }
+    }
+    void InsertInitialData()
+    {
+        // 初期データを5つ挿入
+        for (int i = 0; i < 5; i++)
+        {
+            AddResult(0, 0, 0f, 0f);
+        }
+
+        Debug.Log("Initial data added successfully.");
     }
 
     // データの追加

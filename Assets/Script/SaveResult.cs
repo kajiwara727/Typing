@@ -30,6 +30,7 @@ public class SaveResult : MonoBehaviour
         typeCount = success + failure;
 
         accuracy = (float)success / (float)typeCount;
+        accuracy = Mathf.Round(accuracy * 100) / 100;
 
         point = success * 10 - failure * 5;
         speed = (float)typeCount / 60;

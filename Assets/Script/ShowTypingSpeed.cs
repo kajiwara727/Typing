@@ -30,6 +30,6 @@ public class ShowTypingSpeed : MonoBehaviour
     void ShowResults(int typingCount)
     {
         float typingSpeed = CalculateSpeed(typingCount);
-        typingSpeedText.text = "1ïbÇ†ÇΩÇËÇÃÉ^ÉCÉvêî:" + typingSpeed.ToString("F2") + "âÒ";
+        typingSpeedText.text = "ë≈êî/ïb:" + typingSpeed.ToString("F2");
     }
 }

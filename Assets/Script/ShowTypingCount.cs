@@ -20,6 +20,6 @@ public class ShowTypingCount : MonoBehaviour
 
     void ShowResults(int typingCount)
     {
-        typingCountText.text = "ëçÉ^ÉCÉvêî:" + typingCount.ToString();
+        typingCountText.text = "ëçë≈êî:" + typingCount.ToString();
     }
 }
