@@ -182,15 +182,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Failure
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fae61cd6afc3e674e800ed90e9d89e50, type: 2}
-  m_sharedMaterial: {fileID: -3649336422083294361, guid: fae61cd6afc3e674e800ed90e9d89e50, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
+  m_sharedMaterial: {fileID: 8260975213060610790, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290029351
+  m_fontColor: {r: 0.15294118, g: 0.654902, b: 0.7058824, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -292,7 +292,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 50}
+  m_SizeDelta: {x: 750, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &131101301
 MonoBehaviour:
@@ -316,8 +316,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u8868\u793A\u3059\u308B\u6587\u5B57"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fae61cd6afc3e674e800ed90e9d89e50, type: 2}
-  m_sharedMaterial: {fileID: -3649336422083294361, guid: fae61cd6afc3e674e800ed90e9d89e50, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
+  m_sharedMaterial: {fileID: 8260975213060610790, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -341,8 +341,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 54
+  m_fontSizeBase: 54
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -427,7 +427,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.15294118, g: 0.654902, b: 0.7058824, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -608,17 +608,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Success
+  m_text: aaa
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fae61cd6afc3e674e800ed90e9d89e50, type: 2}
-  m_sharedMaterial: {fileID: -3649336422083294361, guid: fae61cd6afc3e674e800ed90e9d89e50, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
+  m_sharedMaterial: {fileID: 8260975213060610790, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4290029351
+  m_fontColor: {r: 0.15294118, g: 0.654902, b: 0.7058824, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -721,14 +721,80 @@ MonoBehaviour:
     roman: ritumeikan
   - japanese: "\u30D5\u30A9\u30EC\u30B9\u30C8\u30CF\u30A6\u30B9"
     roman: foresutohausu
-  - japanese: "\u7435\u7436\u6E56\u8349\u6D25\u30AD\u30E3\u30F3\u30D1\u30B9"
-    roman: biwakokusatukyanpasu
   - japanese: "\u30AF\u30EA\u30A8\u30FC\u30B7\u30E7\u30F3\u30B3\u30A2"
     roman: kurie-syonkoa
-  - japanese: "\u4EAC\u90FD"
-    roman: kyoto
-  - japanese: "\u6771\u4EAC"
-    roman: tokyo
+  - japanese: "\u30A2\u30AF\u30C8\u30A2\u30EB\u30D5\u30A1"
+    roman: akutoarufa
+  - japanese: "\u30A2\u30AF\u30ED\u30B9\u30A6\u30A3\u30F3\u30B0"
+    roman: akurosuwingu
+  - japanese: "\u30A2\u30B9\u30EA\u30FC\u30C8\u30B8\u30E0"
+    roman: asuri-tojimu
+  - japanese: "\u30A2\u30C9\u30BB\u30DF\u30CA\u30EA\u30AA"
+    roman: adoseminario
+  - japanese: "\u30A4\u30FC\u30B9\u30C8\u30A6\u30A3\u30F3\u30B0"
+    roman: i-sutowingu
+  - japanese: "\u30A6\u30A8\u30B9\u30C8\u30A6\u30A3\u30F3\u30B0"
+    roman: uesutowingu
+  - japanese: "\u30A8\u30AF\u30BB\u30EB"
+    roman: ekuseru
+  - japanese: "\u30A8\u30DD\u30C3\u30AF\u7ACB\u547D"
+    roman: epokkuritumei
+  - japanese: "\u5B66\u8853\u30D5\u30ED\u30F3\u30C6\u30A3\u30A2"
+    roman: gakujutufuronthia
+  - japanese: "\u30B7\u30FC\u30AD\u30E5\u30FC\u30D6"
+    roman: si-kyu-bu
+  - japanese: "\u30AD\u30E3\u30CE\u30D4\u30FC"
+    roman: kyanopi-
+  - japanese: "\u30B3\u30A2\u30B9\u30C6\u30FC\u30B7\u30E7\u30F3"
+    roman: koasute-syon
+  - japanese: "\u30B3\u30E9\u30FC\u30CB\u30F3\u30B0\u30CF\u30A6\u30B9"
+    roman: kora-ninguhausu
+  - japanese: "\u30B5\u30A4\u30A8\u30F3\u30B9\u30B3\u30A2"
+    roman: saiensukoa
+  - japanese: "\u30BB\u30EB"
+    roman: seru
+  - japanese: "\u30BB\u30F3\u30C8\u30E9\u30EB\u30A2\u30FC\u30AF"
+    roman: sentorarua-ku
+  - japanese: "\u30C6\u30AF\u30CE\u30B3\u30F3\u30D7\u30EC\u30AF\u30B9"
+    roman: tekunokonpurekusu
+  - japanese: "\u71C3\u6599\u96FB\u6C60\u30BB\u30F3\u30BF\u30FC"
+    roman: nenryoudentisenta-
+  - japanese: "\u30D7\u30EA\u30BA\u30E0\u30CF\u30A6\u30B9"
+    roman: purizumuhausu
+  - japanese: "\u30E1\u30C7\u30A3\u30A2\u30BB\u30F3\u30BF\u30FC"
+    roman: medhiasenta-
+  - japanese: "\u30E6\u30CB\u30AA\u30F3\u30B9\u30AF\u30A8\u30A2"
+    roman: yunionsukuea
+  - japanese: "\u30ED\u30FC\u30E0\u8A18\u5FF5\u9928"
+    roman: ro-mukinenkan
+  - japanese: "\u30EA\u30F3\u30AF\u30B9\u30AF\u30A8\u30A2"
+    roman: rinkusukuea
+  - japanese: "\u30EC\u30AF\u30BB\u30EB"
+    roman: rekuseru
+  - japanese: "\u30C8\u30EA\u30B7\u30A2"
+    roman: torisia
+  - japanese: "\u30D0\u30A4\u30AA\u30EA\u30F3\u30AF"
+    roman: baiorinku
+  - japanese: "\u7435\u7436\u6E56\u8349\u6D25\u30AD\u30E3\u30F3\u30D1\u30B9"
+    roman: biwakokusatukyanpasu
+  - japanese: "\u7D4C\u6E08\u5B66\u90E8"
+    roman: keizaigakubu
+  - japanese: "\u7406\u5DE5\u5B66\u90E8"
+    roman: rikougakubu
+  - japanese: "\u98DF\u30DE\u30CD\u30B8\u30E1\u30F3\u30C8\u5B66\u90E8"
+    roman: syokumanejimentogakubu
+  - japanese: "\u30B9\u30DD\u30FC\u30C4\u5065\u5EB7\u79D1\u5B66\u90E8"
+    roman: supo-tukenkoukagakubu
+  - japanese: "\u751F\u547D\u79D1\u5B66\u90E8"
+    roman: seimeikagakubu
+  - japanese: "\u85AC\u5B66\u90E8"
+    roman: yakugakubu
+  - japanese: "\u30AD\u30E3\u30F3\u30D1\u30B9\u30D7\u30ED\u30E0\u30CA\u30FC\u30C9"
+    roman: kyanpasupuromuna-do
+  - japanese: "\u30D5\u30ED\u30F3\u30C6\u30A3\u30A2\u30A2\u30D9\u30CB\u30E5\u30FC"
+    roman: furonthiaabenyu-
+  - japanese: "\u30BB\u30F3\u30C8\u30E9\u30EB\u30B5\u30FC\u30AB\u30B9"
+    roman: sentorarusa-kasu
   textJapanese: {fileID: 131101301}
   textRoman: {fileID: 1312786132}
   successCountText: {fileID: 879993928}
@@ -890,8 +956,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 500, y: 50}
+  m_AnchoredPosition: {x: 0, y: -65}
+  m_SizeDelta: {x: 750, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1312786132
 MonoBehaviour:
@@ -915,8 +981,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u30ED\u30FC\u30DE\u5B57\u8868\u793A"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fae61cd6afc3e674e800ed90e9d89e50, type: 2}
-  m_sharedMaterial: {fileID: -3649336422083294361, guid: fae61cd6afc3e674e800ed90e9d89e50, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
+  m_sharedMaterial: {fileID: 8260975213060610790, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -940,8 +1006,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1025,7 +1091,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 380, y: 200}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2087469502
@@ -1040,8 +1106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b345c1e618d59cd489e9c58143304437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minute: 0
-  seconds: 3
+  minute: 1
+  seconds: 0
 --- !u!114 &2087469503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,8 +1130,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Timer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
+  m_sharedMaterial: {fileID: 8260975213060610790, guid: d3f9fddeb9fb81c41822da9f4b7d8e01, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1089,14 +1155,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
