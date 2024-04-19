@@ -15,3 +15,4 @@
 そこで、それらを満たすものとして、タイピングゲームを選択しました。
 
 ## 機能一覧
+[ホーム画面](![image](https://github.com/kajiwara727/game/assets/111957078/53ca69de-630c-4efa-9957-dd6e681e5f87)
