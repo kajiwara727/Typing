@@ -15,4 +15,14 @@
 そこで、それらを満たすものとして、タイピングゲームを選択しました。
 
 ## 機能一覧
-[ホーム画面](![image](https://github.com/kajiwara727/game/assets/111957078/53ca69de-630c-4efa-9957-dd6e681e5f87)
+| ホーム画面 | ゲーム画面 |
+|------------|------------|
+| <img width="300" height="200" src="https://github.com/kajiwara727/game/assets/111957078/d3f9b44d-f524-4f6e-8492-245205043fef"> | <img width="300" height="200" src="https://github.com/kajiwara727/game/assets/111957078/40edc983-56b8-4d48-b018-69fce82410fa"> |
+
+| リザルト画面 | ランキング画面 |
+|------------|------------|
+| <img width="300" height="200" src="https://github.com/kajiwara727/game/assets/111957078/f51f6960-bab8-4c54-9407-a460d0466eca"> | <img width="300" height="200" src="https://github.com/kajiwara727/game/assets/111957078/7fcf9d49-4ced-4839-962f-5bcf233da494"> |
+
+
+
+
